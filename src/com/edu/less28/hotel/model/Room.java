@@ -1,5 +1,7 @@
 package com.edu.less28.hotel.model;
 
+import java.util.Objects;
+
 public class Room {
 	private final int id;
 	private final TypeRoom type;
@@ -19,8 +21,6 @@ public class Room {
 		this.isBooked = false;
 		this.resident = null;
 	}
-
-
 
 	public int getId() {
 		return id;
@@ -54,6 +54,30 @@ public class Room {
 	public void cancelBooking() {
 		isBooked = false;
 		this.resident=null;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, isBooked, resident, type);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Room other = (Room) obj;
+		return id == other.id && isBooked == other.isBooked && Objects.equals(resident, other.resident)
+				&& type == other.type;
+	}
+
+	@Override
+	public String toString() {
+		return "Room [id=" + id + ", " + (type != null ? "type=" + type + ", " : "") + "isBooked=" + isBooked + ", "
+				+ (resident != null ? "resident=" + resident : "") + "]";
 	}
 
 }
