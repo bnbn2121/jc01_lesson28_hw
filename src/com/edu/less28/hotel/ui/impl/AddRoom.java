@@ -8,7 +8,7 @@ import com.edu.less28.hotel.ui.ConsoleUI;
 public class AddRoom implements ConsoleCommand {
 
 	@Override
-	public String getRequest() {
+	public String createRequest() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(CommandName.ADD_ROOM).append("\n");
 		int id = ConsoleUI.userIntInput("enter new room Id:");

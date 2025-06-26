@@ -43,7 +43,7 @@ public class ConsoleUI {
 	private String getRequest(int idCommand) throws IllegalAccessException {
 		try {
 		ConsoleCommand command = ConsoleCommandProvider.getConsoleCommand(idCommand);
-		String request = command.getRequest();
+		String request = command.createRequest();
 		return request;
 		} catch (NullPointerException e){
 			throw new IllegalAccessException("No such command");
