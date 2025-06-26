@@ -5,13 +5,18 @@ import java.util.Objects;
 public class Resident {
 	private final String firstName;
 	private final String lastName;
-	private String phoneNumber;
+	private String phoneNumber;	
 	
+	public Resident() {
+		this.firstName = "no data";
+		this.lastName = "no data";
+		this.phoneNumber = "no data";
+	}
+
 	public Resident(String firstName, String lastName, String phoneNumber) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
-		
 	}
 
 	public String getPhoneNumber() {

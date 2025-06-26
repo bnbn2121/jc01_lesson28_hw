@@ -7,6 +7,5 @@ public class Main {
 	public static void main(String[] args) throws HotelServiceException {
 			ConsoleUI ui = new ConsoleUI();
 			ui.start();
-		
 	}
 }

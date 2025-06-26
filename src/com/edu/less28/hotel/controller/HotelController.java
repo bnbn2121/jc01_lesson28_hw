@@ -1,16 +1,14 @@
 package com.edu.less28.hotel.controller;
 
-import com.edu.less28.hotel.service.HotelServiceException;
-
 public class HotelController {
 	private static HotelController hotelController;
 	private static CommandProvider commandProvider;
 	
-	private HotelController() throws HotelServiceException {
-		commandProvider = new CommandProvider();
+	private HotelController() throws HotelControllerException {
+			commandProvider = new CommandProvider();
 	}
 	
-	public static HotelController getController() throws HotelServiceException {
+	public static HotelController getController() throws HotelControllerException  {
 		if (hotelController == null) {
 			hotelController = new HotelController();
 		}

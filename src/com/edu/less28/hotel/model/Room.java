@@ -8,6 +8,13 @@ public class Room {
 	private boolean isBooked;
 	private Resident resident;
 
+	public Room() {
+		this.id = 0;
+		this.type = null;
+		this.isBooked = false;
+		this.resident = null;
+	}
+
 	public Room(int id, TypeRoom type, boolean isBooked, Resident resident) {
 		this.id = id;
 		this.type = type;

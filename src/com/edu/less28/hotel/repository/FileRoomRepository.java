@@ -2,41 +2,42 @@ package com.edu.less28.hotel.repository;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import com.edu.less28.hotel.main.Main;
 import com.edu.less28.hotel.model.Room;
-import com.edu.less28.hotel.util.HotelDataReader;
-import com.edu.less28.hotel.util.HotelDataWriter;
 
 public class FileRoomRepository implements RoomRepository {
 	private final String DATA_PATH;
-	private HotelDataWriter writer;
-	private HotelDataReader reader;
+	private final RoomDataWriter writer;
+	private final RoomDataReader reader;
 	private List<Room> tempRooms;
 
 	public FileRoomRepository() throws RoomRepositoryException {
 		URL location = Main.class.getProtectionDomain().getCodeSource().getLocation();
 		DATA_PATH = location.getPath() + "resources/HotelData.txt";
-		writer = new HotelDataWriter();
-		reader = new HotelDataReader();
-		tempRooms = loadRoomsFromFile();
+		writer = new RoomDataWriter();
+		reader = new RoomDataReader();
+		loadRoomsFromFile();
 	}
 
-	private List<Room> loadRoomsFromFile() throws RoomRepositoryException {
+	private void loadRoomsFromFile() throws RoomRepositoryException {
 		try {
-			return reader.getRooms(DATA_PATH);
+			tempRooms = reader.getRooms(DATA_PATH);
 		} catch (IOException e) {
-			throw new RoomRepositoryException("Failed to load rooms from file", e);
+			throw new RoomRepositoryException("Failed to load rooms from file\n", e);
 		}
 	}
 
 	private void saveRoomsToFile() throws RoomRepositoryException {
 		try {
+
 			writer.writeToFile(tempRooms, DATA_PATH);
+
 		} catch (IOException e) {
-			throw new RoomRepositoryException("Failed to save rooms to file", e);
+			throw new RoomRepositoryException("Failed to save rooms to file\n", e);
 		}
 	}
 
@@ -59,43 +60,54 @@ public class FileRoomRepository implements RoomRepository {
 
 	@Override
 	public boolean isExists(Room room) {
-		if(findRoomIndex(room)==-1) {
-			return false;
-		} else {
-			return true;
+		synchronized (tempRooms) {
+			if (findRoomIndex(room) == -1) {
+				return false;
+			} else {
+				return true;
+			}
 		}
-		
 	}
 
 	@Override
 	public void addRoom(Room room) throws RoomRepositoryException {
-		tempRooms.add(room);
-		saveRoomsToFile();
+		synchronized (tempRooms) {
+			tempRooms.add(room);
+			saveRoomsToFile();
+		}
 	}
 
 	@Override
 	public void updateRoom(Room roomUpdated) throws RoomRepositoryException {
-		int indexRoomForUpdate = findRoomIndex(roomUpdated);
-		tempRooms.set(indexRoomForUpdate, roomUpdated);
-		saveRoomsToFile();
+		synchronized (tempRooms) {
+			int indexRoomForUpdate = findRoomIndex(roomUpdated);
+			tempRooms.set(indexRoomForUpdate, roomUpdated);
+			saveRoomsToFile();
+		}
 	}
 
 	@Override
 	public Optional<Room> findRoomById(int RoomId) {
-		int indexRoom = findRoomIndex(RoomId);
-		return Optional.ofNullable(tempRooms.get(indexRoom));
+		synchronized (tempRooms) {
+			int indexRoom = findRoomIndex(RoomId);
+			return Optional.ofNullable(tempRooms.get(indexRoom));
+		}
 	}
 
 	@Override
 	public void removeRoomById(int RoomId) throws RoomRepositoryException {
-		int indexRoom = findRoomIndex(RoomId);
-		tempRooms.remove(indexRoom);
-		saveRoomsToFile();
+		synchronized (tempRooms) {
+			int indexRoom = findRoomIndex(RoomId);
+			tempRooms.remove(indexRoom);
+			saveRoomsToFile();
+		}
 	}
 
 	@Override
 	public List<Room> getAllRooms() {
-		return tempRooms;
+		synchronized (tempRooms) {
+			return new ArrayList<>(tempRooms);
+		}
 	}
 
 }

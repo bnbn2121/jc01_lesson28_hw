@@ -1,4 +1,4 @@
-package com.edu.less28.hotel.util;
+package com.edu.less28.hotel.repository;
 
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -7,8 +7,9 @@ import java.io.OutputStreamWriter;
 import java.util.List;
 
 import com.edu.less28.hotel.model.Room;
+import com.edu.less28.hotel.util.RoomParser;
 
-public class HotelDataWriter {
+public class RoomDataWriter {
 	private final RoomParser roomParser = RoomParser.getInstance();
 	
 	public void writeToFile(Room room, String path) throws IOException {

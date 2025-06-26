@@ -1,4 +1,4 @@
-package com.edu.less28.hotel.util;
+package com.edu.less28.hotel.repository;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -8,17 +8,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.edu.less28.hotel.model.Room;
+import com.edu.less28.hotel.util.RoomParser;
 
-public class HotelDataReader {
-private final RoomParser roomParser = RoomParser.getInstance();
+public class RoomDataReader {
 	
+	private final RoomParser roomParser = RoomParser.getInstance();
+
 	public List<Room> getRooms(String path) throws IOException {
 		List<Room> rooms = new ArrayList<Room>();
 		try (BufferedReader bReader = new BufferedReader(new InputStreamReader(new FileInputStream(path)))) {
 			String tempString;
 			while ((tempString = bReader.readLine()) != null) {
-					Room room  = roomParser.parseFromString(tempString);
-					rooms.add(room);
+				Room room = roomParser.parseFromString(tempString);
+				rooms.add(room);
 			}
 		}
 		return rooms;
