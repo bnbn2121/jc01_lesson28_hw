@@ -3,14 +3,11 @@ package com.edu.less28.hotel.model;
 import java.util.Objects;
 
 public class Resident {
-	private final String firstName;
-	private final String lastName;
-	private String phoneNumber;	
-	
+	private String firstName;
+	private String lastName;
+	private String phoneNumber;
+
 	public Resident() {
-		this.firstName = "no data";
-		this.lastName = "no data";
-		this.phoneNumber = "no data";
 	}
 
 	public Resident(String firstName, String lastName, String phoneNumber) {
@@ -19,20 +16,32 @@ public class Resident {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setFirstName(String firstName) {
+		if (this.firstName == null) {
+			this.firstName = firstName;
+		}
 	}
 
 	public String getFirstName() {
 		return firstName;
 	}
 
+	public void setLastName(String lastName) {
+		if (this.lastName == null) {
+			this.lastName = lastName;
+		}
+	}
+
 	public String getLastName() {
 		return lastName;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	@Override
@@ -59,5 +68,7 @@ public class Resident {
 				+ (lastName != null ? "lastName=" + lastName + ", " : "")
 				+ (phoneNumber != null ? "phoneNumber=" + phoneNumber : "") + "]";
 	}
+
+	
 
 }

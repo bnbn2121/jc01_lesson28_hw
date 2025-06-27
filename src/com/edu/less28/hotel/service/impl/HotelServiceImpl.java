@@ -1,4 +1,4 @@
-package com.edu.less28.hotel.service;
+package com.edu.less28.hotel.service.impl;
 
 import java.util.List;
 
@@ -7,16 +7,14 @@ import com.edu.less28.hotel.model.Room;
 import com.edu.less28.hotel.repository.RoomRepository;
 import com.edu.less28.hotel.repository.RoomRepositoryException;
 import com.edu.less28.hotel.repository.RoomRepositoryProvider;
+import com.edu.less28.hotel.service.HotelService;
+import com.edu.less28.hotel.service.HotelServiceException;
 
 public class HotelServiceImpl implements HotelService {
 	private RoomRepository rooms;
 
-	public HotelServiceImpl() throws HotelServiceException {
-		try {
+	public HotelServiceImpl() {
 			this.rooms = RoomRepositoryProvider.getRoomRepository();
-		} catch (RoomRepositoryException e) {
-			throw new HotelServiceException("Error creating service\n" + e.getMessage(), e);
-		}
 	}
 	
 	@Override

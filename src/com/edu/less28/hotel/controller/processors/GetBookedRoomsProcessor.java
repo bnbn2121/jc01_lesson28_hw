@@ -3,23 +3,16 @@ package com.edu.less28.hotel.controller.processors;
 import java.util.List;
 
 import com.edu.less28.hotel.controller.CommandProcessor;
-import com.edu.less28.hotel.controller.HotelControllerException;
 import com.edu.less28.hotel.model.Room;
-import com.edu.less28.hotel.service.HotelServiceProvider;
 import com.edu.less28.hotel.service.HotelService;
-import com.edu.less28.hotel.service.HotelServiceException;
 import com.edu.less28.hotel.util.RoomParser;
 
 public class GetBookedRoomsProcessor implements CommandProcessor{
 	
 	private HotelService hotelService;
 
-	public GetBookedRoomsProcessor() throws HotelControllerException  {
-		try {
-			this.hotelService = HotelServiceProvider.getHotelService();
-		} catch (HotelServiceException e) {
-			throw new HotelControllerException(e.getMessage(), e);
-		}
+	public GetBookedRoomsProcessor(HotelService hotelService)  {
+		this.hotelService = hotelService;
 	}
 
 	@Override

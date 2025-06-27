@@ -1,4 +1,4 @@
-package com.edu.less28.hotel.repository;
+package com.edu.less28.hotel.repository.impl;
 
 import java.io.IOException;
 import java.net.URL;
@@ -8,6 +8,10 @@ import java.util.Optional;
 
 import com.edu.less28.hotel.main.Main;
 import com.edu.less28.hotel.model.Room;
+import com.edu.less28.hotel.repository.RoomDataReader;
+import com.edu.less28.hotel.repository.RoomDataWriter;
+import com.edu.less28.hotel.repository.RoomRepository;
+import com.edu.less28.hotel.repository.RoomRepositoryException;
 
 public class FileRoomRepository implements RoomRepository {
 	private final String DATA_PATH;
@@ -15,12 +19,16 @@ public class FileRoomRepository implements RoomRepository {
 	private final RoomDataReader reader;
 	private List<Room> tempRooms;
 
-	public FileRoomRepository() throws RoomRepositoryException {
+	public FileRoomRepository() {
 		URL location = Main.class.getProtectionDomain().getCodeSource().getLocation();
 		DATA_PATH = location.getPath() + "resources/HotelData.txt";
 		writer = new RoomDataWriter();
 		reader = new RoomDataReader();
-		loadRoomsFromFile();
+		try {
+			loadRoomsFromFile();
+		} catch (RoomRepositoryException e) {
+			throw new RuntimeException("Error data initialization", e);
+		}
 	}
 
 	private void loadRoomsFromFile() throws RoomRepositoryException {

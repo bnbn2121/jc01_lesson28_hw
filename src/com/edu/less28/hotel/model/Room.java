@@ -3,16 +3,12 @@ package com.edu.less28.hotel.model;
 import java.util.Objects;
 
 public class Room {
-	private final int id;
-	private final TypeRoom type;
+	private int id;
+	private TypeRoom type;
 	private boolean isBooked;
 	private Resident resident;
 
 	public Room() {
-		this.id = 0;
-		this.type = null;
-		this.isBooked = false;
-		this.resident = null;
 	}
 
 	public Room(int id, TypeRoom type, boolean isBooked, Resident resident) {
@@ -29,8 +25,20 @@ public class Room {
 		this.resident = null;
 	}
 
+	public void setId(int id) {
+		if (this.id == 0) {
+			this.id = id;
+		}
+	}
+
 	public int getId() {
 		return id;
+	}
+
+	public void setType(TypeRoom type) {
+		if (this.type == null) {
+			this.type = type;
+		}
 	}
 
 	public TypeRoom getType() {
@@ -52,15 +60,15 @@ public class Room {
 	public void setResident(Resident resident) {
 		this.resident = resident;
 	}
-	
+
 	public void bookRoom(Resident resident) {
 		isBooked = true;
-		this.resident=resident;
+		this.resident = resident;
 	}
-	
+
 	public void cancelBooking() {
 		isBooked = false;
-		this.resident=null;
+		this.resident = null;
 	}
 
 	@Override

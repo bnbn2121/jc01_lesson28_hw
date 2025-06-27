@@ -4,11 +4,11 @@ public class HotelController {
 	private static HotelController hotelController;
 	private static CommandProvider commandProvider;
 	
-	private HotelController() throws HotelControllerException {
+	private HotelController() {
 			commandProvider = new CommandProvider();
 	}
 	
-	public static HotelController getController() throws HotelControllerException  {
+	public static HotelController getController() {
 		if (hotelController == null) {
 			hotelController = new HotelController();
 		}

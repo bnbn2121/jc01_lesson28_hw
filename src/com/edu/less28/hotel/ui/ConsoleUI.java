@@ -4,19 +4,13 @@ import java.util.Scanner;
 
 import com.edu.less28.hotel.controller.CommandName;
 import com.edu.less28.hotel.controller.HotelController;
-import com.edu.less28.hotel.controller.HotelControllerException;
 
 public class ConsoleUI {
 	private HotelController hotelController;
 	private static Scanner scanner = new Scanner(System.in);
 
 	public ConsoleUI() {
-		try {
 			this.hotelController = HotelController.getController();
-		} catch (HotelControllerException e) {
-			System.out.println("Application stopped\n" + e.getMessage());
-			System.exit(0);			
-		}
 	}
 
 	public static int userIntInput(String message) {
