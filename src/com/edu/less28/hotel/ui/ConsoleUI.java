@@ -23,6 +23,7 @@ public class ConsoleUI {
 				scanner.nextLine();
 				return input;
 			}
+			scanner.nextLine();
 			System.out.println("Not correct input. Try again");
 		}
 	}
