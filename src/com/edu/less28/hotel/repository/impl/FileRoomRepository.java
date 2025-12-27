@@ -98,6 +98,9 @@ public class FileRoomRepository implements RoomRepository {
 	public Optional<Room> findRoomById(int RoomId) {
 		synchronized (tempRooms) {
 			int indexRoom = findRoomIndex(RoomId);
+            if (indexRoom == -1) {
+                return Optional.empty();
+            }
 			return Optional.ofNullable(tempRooms.get(indexRoom));
 		}
 	}
@@ -117,5 +120,4 @@ public class FileRoomRepository implements RoomRepository {
 			return new ArrayList<>(tempRooms);
 		}
 	}
-
 }

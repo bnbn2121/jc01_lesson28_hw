@@ -12,7 +12,7 @@ public class AddRoom implements ConsoleCommand {
 		StringBuilder sb = new StringBuilder();
 		sb.append(CommandName.ADD_ROOM).append("\n");
 		int id = ConsoleUI.userIntInput("enter new room Id:");
-		String type = ConsoleUI.userStringInput("enter type (STANDART, COMFORT, LUX) of room:").toUpperCase();
+		String type = ConsoleUI.userStringInput("enter type (STANDARD, COMFORT, LUX) of room:").toUpperCase();
 		try {
 			TypeRoom typeRoom = TypeRoom.valueOf(type);
 			sb.append(id).append(" | ");

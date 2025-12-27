@@ -12,7 +12,7 @@ public class ChangeRoom implements ConsoleCommand {
 		StringBuilder sb = new StringBuilder();
 		sb.append(CommandName.CHANGE_ROOM).append("\n");
 		int id = ConsoleUI.userIntInput("enter room id:");
-		String type = ConsoleUI.userStringInput("enter type (STANDART, COMFORT, LUX) of room:").toUpperCase();
+		String type = ConsoleUI.userStringInput("enter type (STANDARD, COMFORT, LUX) of room:").toUpperCase();
 		TypeRoom typeRoom = TypeRoom.valueOf(type);
 		String isBooked = ConsoleUI.userStringInput("enter status (booked / free) of room:");
 		sb.append(id).append(" | ");
